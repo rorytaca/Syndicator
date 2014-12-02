@@ -1,18 +1,30 @@
-<!--
-<table>
-  <tbody>
-  <tr ng-repeat="promo in promos | orderBy:'name'">
-    <td><a ng-href="{{promo.site}}" target="_blank">{{promo.name}}</a></td>
-    <td>{{promo.description}}</td>
-    <td>
-      <a ng-href="#/edit/{{promo.$id}}"><i class="icon-pencil"></i></a>
-    </td>
-  </tr>
-  </tbody>
-</table>
--->
 
-    <div class="product-row" ng-repeat="product in products | orderBy:'name'">
-        <a class="product-url" ng-href="{{product.site}}" target="_blank">{{product.name}}</a>
-        <span class="product-desc">{{product.text}}</span>
+    <div id="tool-bar" class="inner2-wrapper">
+        <a href="#/newProduct" class="tool-bar-btn" id="">
+            <span class="glyphicon glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+            Add New Promotion
+        </a>
+        <a href="#/newSite" class="tool-bar-btn" id="">
+            <span class="glyphicon glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+            Add New Site
+        </a>
+    </div>
+    
+    <div id="info-bar" class="inner2-wrapper">
+        <span class="info-bar-header name">Name</span>
+        <span class="info-bar-header price">Price</span>
+        <span class="info-bar-header desc">Description</span>
+        <span class="info-bar-header stat">Status</span>
+    </div>
+    
+    <div class="product-row" ng-repeat="product in products | orderBy:'name'"> 
+        <!-- <a href="https://amber-inferno-7558.firebaseio.com/{{product.$id}}">{{product.$id}}</a>-->
+        <a class="product-info name" ng-href="{{product.site}}" target="_blank" href="https://amber-inferno-7558.firebaseio.com/{{product.$id}}">{{product.name}}</a>
+        <span class="product-info price">${{product.price}}</span>
+        <span class="product-info desc">{{product.description}}</span>
+        <span class="glyphicon glyphicon-ok green" aria-hidden="true" ng-show="{{product.status}}"></span>
+        <span class="glyphicon glyphicon-exclamation-sign red" aria-hidden="true" ng-show="!{{product.status}}"></span>
+        
+        
+
     </div>

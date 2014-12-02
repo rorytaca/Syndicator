@@ -36,7 +36,7 @@ h1 {
     font-size: 1.2em;
 }
 
-.info-bar-header {
+.info-bar-header, .product-info {
     float: left;
     line-height: 300%;
 }
@@ -44,19 +44,20 @@ h1 {
     width: 5%;
 }
 
-.info-bar-header.name {
+.info-bar-header.name, .product-info.name {
+    margin-left: 5px;
     width: 25%;
 }
 
-.site {
+.info-bar-header.price, .product-info.price {
     width: 25%;
 }
 
-.desc {
+.info-bar-header.desc, .product-info.desc {
     width: 30%;
 }
 
-.stat {
+.info-bar-header.stat, .product-info.stat {
     width: 5%;
 }
 
@@ -72,9 +73,18 @@ h1 {
     background: #efefef;
 }
 
+.glyphicon {
+    font-size: 1.2em;
+    margin-left: 12px;
+}
+
+
 /* ==========================================================================
    COMMON CUSTOM STYLES AND BOOTSTRAP OVERWRITES
    ========================================================================== */
+.red { color: red; }
+.green { color: green; }
+
 .no-transition {
   -webkit-transition: all 0.001s;
   -moz-transition: all 0.001s;

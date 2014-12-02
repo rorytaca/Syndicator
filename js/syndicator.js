@@ -1,7 +1,7 @@
 angular.module('syndicatorApp', ['ngRoute', 'firebase'])
     //firebase first
-    .value('fbURL', 'https://buc1ya1k9sw.firebaseio-demo.com/')
-    .factory('Product', function($firebase, fbURL) {
+    .value('fbURL', 'https://amber-inferno-7558.firebaseio.com/')
+    .factory('Products', function($firebase, fbURL) {
         return $firebase(new Firebase(fbURL)).$asArray();
     })
     .config(function($routeProvider) {
@@ -10,22 +10,28 @@ angular.module('syndicatorApp', ['ngRoute', 'firebase'])
               controller:'ListCtrl',
               templateUrl:'views/list.html'
             })
-            .when('/new', {
+            .when('/newProduct', {
               controller:'CreateCtrl',
-              templateUrl:'detail.html'
+              templateUrl:'views/create.html'
+            })
+            .when('/newSite', {
+              controller:'addSiteCtrl',
+              templateUrl:'views/addSite.html'
             })
             .otherwise({
               redirectTo:'/'
             });
     })
-    .controller('ListCtrl', function($scope, Product) {
-        $scope.products = Product;
+    .controller('ListCtrl', function($scope, Products) {
+        $scope.products = Products;
     })
-    .controller('CreateCtrl', function($scope, $location, Product) {
-      $scope.save = function() {
-          Products.$add($scope.product).then(function(data) {
-              $location.path('/');
-          });
+    .controller('CreateCtrl', function($scope, $location, Products) {
+        
+        $scope.save = function() {
+            $scope.product.status = false;
+            Products.$add($scope.product).then(function(data) {
+               $location.path('/');
+            });
       };
     })    
     
