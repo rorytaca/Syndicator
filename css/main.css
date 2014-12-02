@@ -12,12 +12,17 @@ body { background: #fff; }
 }
 a { text-decoration: none; }
 a:hover { text-decoration: none; }
-h1 {
+h1,h2 {
     line-height: 150%;
     padding: 10px 0;
     font-weight: 900;
     text-shadow: 0;
     font-family: "Ruda", Arial, sans-serif;
+}
+h1 { text-transform: uppercase; }
+h2 {
+    font-weight: 400;
+    font-size: 2em;
 }
 
 #tool-bar {
