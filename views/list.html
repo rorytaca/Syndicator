@@ -1,0 +1,18 @@
+<!--
+<table>
+  <tbody>
+  <tr ng-repeat="promo in promos | orderBy:'name'">
+    <td><a ng-href="{{promo.site}}" target="_blank">{{promo.name}}</a></td>
+    <td>{{promo.description}}</td>
+    <td>
+      <a ng-href="#/edit/{{promo.$id}}"><i class="icon-pencil"></i></a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+-->
+
+    <div class="product-row" ng-repeat="product in products | orderBy:'name'">
+        <a class="product-url" ng-href="{{product.site}}" target="_blank">{{product.name}}</a>
+        <span class="product-desc">{{product.text}}</span>
+    </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="syndicatorApp">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,11 +8,20 @@
         <meta name="author" content="Rory Taca">            
         <title>Pulsd Syndicator Demo</title>
         
+        <!-- Angular/Firebase Bootstrapping -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-resource.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
+        <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+        <script src="https://cdn.firebase.com/libs/angularfire/0.9.0/angularfire.min.js"></script>
+        <script src="js/syndicator.js"></script>
+            
         <!-- CSS Includes: Bootstrap first, then custom ones -->
-       <link href='http://fonts.googleapis.com/css?family=Ruda:400,700,900' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Ruda:400,700,900' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css" type='text/css'>   
-    
+        
+
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -24,16 +33,16 @@
     <body>
         <!-- Page Content-->
         <div class="container">
-            <div id="header" class="page-header">
+            <div id="header" class="page-header inner2-wrapper">
                 <h1>Pulsd Syndicator Demo</h1>
             </div>
             
-            <div id="tool-bar" class="inner-wrapper">
+            <div id="tool-bar" class="inner2-wrapper">
                 <a href="#" class="tool-bar-btn" id=""><span class="glyphicon glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add New Promotion</a>
                 
             </div>
             
-            <div id="info-bar" class="inner-wrapper">
+            <div id="info-bar" class="inner2-wrapper">
                 <span class="info-bar-header id">ID</span>
                 <span class="info-bar-header name">Name</span>
                 <span class="info-bar-header site">Site</span>
@@ -41,9 +50,9 @@
                 <span class="info-bar-header stat">Status</span>
             </div>
             
-            <div id="promotions-bar" class="inner-wrapper">
+            <div id="promotions-bar">
                 <!-- Will read from database, and populate all the promotions listed so far in this div -->
-                
+                <div ng-view></div>
                 
             </div>
 
