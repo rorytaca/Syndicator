@@ -1,7 +1,7 @@
-body { background: #f; }
+body { background: #fff; }
 
 #header {padding-bottom: 20px;}
-.page-header { margin-bottom: 0px; }
+.page-header { margin-bottom: 0px; border-bottom: 0; }
 .container, .container-fluid { padding: 0; }
 
 .inner-wrapper {
@@ -10,7 +10,8 @@ body { background: #f; }
     padding: 0 1% 0 1%;
 
 }
-
+a { text-decoration: none; }
+a:hover { text-decoration: none; }
 h1 {
     line-height: 150%;
     padding: 10px 0;
@@ -20,13 +21,27 @@ h1 {
 }
 
 #tool-bar {
-    height: 50px;
-    background: #ddd;
-    border-bottom: solid 1px #bbb;
+    float: left;
+    min-height: 50px;
+    max-height: 220px;
+    border: solid 1px #ccc;
+    border-radius: 3px;
+    width: 100%;
 }
 
+#tool-bar a {
+    margin-right: 10px;
+}
+#tool-bar a .glyphicon {
+    float: left;
+    line-height: 220%;
+    margin-right: 5px;
+
+}
 #info-bar {
-    height: 40px;
+    float: left;
+    min-height: 40px;
+    width: 100%;
     border-bottom: solid 1px #ddd;
 }
 
@@ -61,6 +76,10 @@ h1 {
     width: 5%;
 }
 
+#products-bar {
+    width: 100%;
+}
+
 .product-row {
     float: left;
     width: 100%;
@@ -70,7 +89,7 @@ h1 {
 }
 
 .product-row:nth-of-type(odd) {
-    background: #efefef;
+    background: #fafafa;
 }
 
 .glyphicon {
