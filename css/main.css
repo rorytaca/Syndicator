@@ -102,6 +102,11 @@ h2 {
     margin-left: 12px;
 }
 
+p.form-footer {
+    clear: both;
+    padding-top: 15px;
+    font-size: .8em;
+}
 
 /* ==========================================================================
    COMMON CUSTOM STYLES AND BOOTSTRAP OVERWRITES
