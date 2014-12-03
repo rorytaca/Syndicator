@@ -1,4 +1,7 @@
+
 <?php
+    //This is a script for testing to see the return value when you CURL the FIREBASE db
+    
     $url = 'https://amber-inferno-7558.firebaseio.com/.json';
     $curl = curl_init();
     curl_setopt_array($curl, array(

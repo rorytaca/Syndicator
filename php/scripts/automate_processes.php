@@ -1,4 +1,6 @@
 <?php
+    //This is the roll-call script that will be called by CRON JOBS to initiate all syndication functions
+
     //cURL to fetch data set from firebase 
     $url = 'https://amber-inferno-7558.firebaseio.com/.json'
     $curl = curl_init();
