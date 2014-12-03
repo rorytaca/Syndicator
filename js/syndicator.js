@@ -15,8 +15,8 @@ angular.module('syndicatorApp', ['ngRoute', 'firebase'])
               templateUrl:'views/listProducts.html'
             })
             .when('/newProduct', {
-              controller:'CreateCtrl',
-              templateUrl:'views/create.html'
+              controller:'AddPromotionCtrl',
+              templateUrl:'views/addPromotion.html'
             })
             .when('/newSite', {
               controller:'AddSiteCtrl',
@@ -33,7 +33,7 @@ angular.module('syndicatorApp', ['ngRoute', 'firebase'])
     .controller('ListProductsCtrl', function($scope, Products) {
         $scope.products = Products;
     })
-    .controller('CreateCtrl', function($scope, $location, Products) {
+    .controller('AddPromotionCtrl', function($scope, $location, Products) {
         
         $scope.save = function() {
             $scope.product.status = false;

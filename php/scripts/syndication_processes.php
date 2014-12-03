@@ -65,7 +65,8 @@
     //If platform is expanded to hold category tags for EVENTS/PRODUCTS, we can add some logic to send out emails to different locations within timeout.com.... i.e. nightlife.ny@timeout.com, shopping.ny@timeout.com
     function submit_timeout_newyork_email($arr) {
         //Variables for email
-        $to = 'thisweek.ny@timeout.com';                                     //FOR TESTING CHANGE TO - $to = "syndicatordemo@gmail.com"; 
+        //$to = 'thisweek.ny@timeout.com';                                     //FOR TESTING CHANGE TO - $to = "syndicatordemo@gmail.com";
+        $to = "syndicatordemo@gmail.com";
         $subject = 'Event Listing: ' . $arr['name'];
         $headers = "From: joe@example.com\r\nReply-To: joe@example.com";    //Fake emails for header  
 
@@ -92,9 +93,9 @@
         
         //Append Logs with result
         if ($mail_sent) {
-            $to_log = "PASS: EMAIL " . $subject . ' > ' . $to;
+            $to_log = "PASS: EMAIL " . $subject . ' > ' . $to . PHP_EOL;
         } else {
-            $to_log = "FAIL: EMAIL " . $subject . ' > ' . $to;
+            $to_log = "FAIL: EMAIL " . $subject . ' > ' . $to . PHP_EOL;
         }
         file_put_contents("logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
     }

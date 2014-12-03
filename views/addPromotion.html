@@ -1,0 +1,86 @@
+<div class="jumbotron">
+    <h2 class="text-center">Add New Product Promotion to List</h2>
+    <form name="myForm" class="form-horizontal">
+        
+        <div class="control-group form-group" ng-class="{error: myForm.name.$invalid && !myForm.name.$pristine}">
+            <label for="nameInput" class="col-sm-2 control-label">Product Name*</label>
+            <div class="col-sm-10">
+                <input id="nameInput" class="form-control" type="text" name="name" ng-model="product.name" required>
+                <span ng-show="myForm.name.$error.required && !myForm.name.$pristine" class="help-inline">
+                    Required {{myForm.name.$pristine}}
+                </span>
+            </div>
+
+        </div>
+       
+        <div class="control-group form-group" ng-class="{error: myForm.price.$invalid && !myForm.price.$pristine}">
+            <label for="priceInput" class="col-sm-2 control-label">Price*</label>
+            <div class="col-sm-6">
+                <input id="priceInput" class="form-control" type="number" name="price" ng-model="product.price" required>
+                <span ng-show="myForm.price.$error.required && !myForm.price.$pristine" class="help-inline">
+                    Required
+                </span>
+            </div>
+        </div>
+       
+        <div class="form-group">
+            <label for="descInput" class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-6">            
+                <textarea id="descInput" class="form-control" name="description" ng-model="product.description"></textarea>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="addressInput" class="col-sm-2 control-label">Address</label>
+            <div class="col-sm-6">            
+                <textarea id="addressInput" class="form-control" name="address" ng-model="product.address"></textarea>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="phoneInput" class="col-sm-2 control-label">Phone</label>
+            <div class="col-sm-6">            
+                <textarea id="phoneInput" class="form-control" name="phone" ng-model="product.phone"></textarea>
+            </div>
+        </div>            
+        
+        <div class="form-group">
+            <label for="websiteInput" class="col-sm-2 control-label">Website</label>
+            <div class="col-sm-6">            
+                <textarea id="websiteInput" class="form-control" name="website" ng-model="product.website"></textarea>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="expirationDateInput" class="col-sm-2 control-label">Date/Expiration Date (MM-DD-YYYY)</label>
+            <div class="col-sm-6">            
+                <textarea id="experiationDateInput" class="form-control" name="expiration_date" ng-model="product.expiration_date"></textarea>
+            </div>
+        </div>        
+        
+        <!--
+        <div class="form-group">
+            <label for="expirationDateInput" class="col-sm-2 control-label">Date / Expiration Date</label>
+            <div id="datetimepicker" class="input-append col-sm-6">
+                <input id="expirationDateInput" class="form-control" data-format="MM-dd-yyyy" type="text" name="expiration_date" ng-model="product.expiration_date"></input>
+                <span class="add-on">
+                  <i class="glyphicon glyphicon-align-left" aria-hidden="true"></i>
+                </span>
+            </div>           
+        </div>
+
+        
+        <div class="form-group">
+            <label for="expirationDateInput" class="col-sm-2 control-label">Date / Expiration Date</label>
+            <input class="form-control" id="expirationDateInput" data-format="MM-dd-yyyy" type="text" name="expiration_date" ng-model="product.expiration_date"/>
+        </div>        
+        -->
+        
+        <div class="col-md-4 col-md-offset-5">
+            <a href="#/" class="btn">Cancel</a>
+            
+            <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-primary">Save</button>
+            <button ng-click="destroy()" ng-show="product.$id" class="btn btn-danger">Delete</button>
+        </div>
+    </form>
+</div>

@@ -59,6 +59,7 @@ h2 {
 .info-bar-header, .product-info {
     float: left;
     line-height: 300%;
+    min-height: 40px;
 }
 .info-bar-header.id {
     width: 5%;
