@@ -64,20 +64,23 @@
     //submit_timeout_newyork_email($json);
     if (is_array($json)) {
         foreach($json as  $key => $val) {
-            //CALL ALL 5 SYNDICATION PROCEDURES HERE $val
+            //CALL ALL 5 SYNDICATION PROCEDURES HERE on $val
             
             submit_dealcatchers_form($val)
             submit_timeout_newyork_email($val);
             submit_retailmenot_form($val);
+            submit_mycoupons_form($val)
              
             putcURLtoFireBase($val, $key);
         }    
     } else {
-        //CALL ALL 5 SYNDICATION PROCEDURES HERE AS WEL FOR $json
+        //Only single node of data returned so
+        //CALL ALL 5 SYNDICATION PROCEDURES HERE AS WELL FOR individual $json
         
         submit_dealcatchers_form($json)
         submit_timeout_newyork_email($json);
         submit_retailmenot_form($json);
+        submit_mycoupons_form($json)
         
         putcURLtoFireBase($json);
     }

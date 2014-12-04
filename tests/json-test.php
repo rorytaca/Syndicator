@@ -2,7 +2,7 @@
 ==========================================================================================================
     json-test.php
 ==========================================================================================================
-    This is the script that I used to debug the individual syndication processes. Called them manually for my web browser and printed out json returns or curl logs
+    This is the script that I used to debug the individual syndication processes. Called them manually from my web browser and printed out json returns or curl logs
     
 
 -->
