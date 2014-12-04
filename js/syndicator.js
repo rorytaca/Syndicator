@@ -42,7 +42,7 @@ angular.module('syndicatorApp', ['ngRoute', 'firebase'])
             });
       };
     })
-        .controller('ListSitesCtrl', function($scope, Websites) {
+    .controller('ListSitesCtrl', function($scope, Websites) {
         $scope.websites = Websites;
     })
     .controller('AddSiteCtrl', function($scope, $location, Websites) {

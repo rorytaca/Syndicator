@@ -1,3 +1,12 @@
+<!--
+==========================================================================================================
+    submission-test.php
+==========================================================================================================
+    This is another script that I used to debug an individual syndication processes. Called them manually for my web browser and printed out json returns or curl logs
+    
+
+-->
+
 <?php
     //This script is for testing all the functions in syndication_process.php:
     //Tests are using pre-defined variables and not the JSON objects that will actually be fed into functions by 'php/scripts/automate_processes.php';

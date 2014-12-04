@@ -1,4 +1,11 @@
+<!--
+==========================================================================================================
+    json-test.php
+==========================================================================================================
+    This is the script that I used to debug the individual syndication processes. Called them manually for my web browser and printed out json returns or curl logs
+    
 
+-->
 <?php
 
     //This is a script for testing to see the return value when you CURL the FIREBASE db

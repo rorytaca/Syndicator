@@ -1,3 +1,10 @@
+<!--
+==========================================================================================================
+   syndication_processes.php
+==========================================================================================================
+    This is the lib of individual functions called to process any product syndication. Each different site has its own unique procedural function
+    that will be called at a set time interval by 'automate_processes.php' by a CRON JOB
+-->
 <?php
     
     //Common Variables across procedures
@@ -98,5 +105,69 @@
             $to_log = "FAIL: EMAIL " . $subject . ' > ' . $to . PHP_EOL;
         }
         file_put_contents("logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
+    }
+    
+    //Handles form submissions to URL: http://www.retailmenot.com/submit
+    //A bit more difficult than first process... Not a clear POST path, log in required first, cookies need to be preserved
+    function submit_retailmenot_form($arr) {
+        //cURL Post to log in to website
+        $login_url = "http://www.retailmenot.com/ajax/login.php";
+        $post_data = "email=syndicatordemo%40gmail.com&password=Xy123456%21&source=us-rmn-desktop";      //Pre-prepaired the data-string for this cURL
+        
+        $ch = curl_init();
+        $agent = $_SERVER["HTTP_USER_AGENT"];
+        curl_setopt($ch, CURLOPT_USERAGENT, $agent);
+        curl_setopt($ch, CURLOPT_URL, $login_url );
+        curl_setopt($ch, CURLOPT_POST, 1 );
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        
+        // Save session data
+        curl_setopt($ch, CURLOPT_COOKIEJAR, 'cookie.txt');
+        curl_setopt($ch, CURLOPT_COOKIEFILE, 'cookie.txt');
+
+        $login_result = curl_exec($ch);    //RESULT of login
+        //print 'log in attempt: ' . curl_errno($ch) . '-' . curl_error($ch) . ' ON - ' . $login_url . 'POST: ' . $post_data . PHP_EOL;
+
+        //Need to continue on and cURL post the coupon form
+        $form_url = 'http://www.retailmenot.com/submit';
+        curl_setopt($ch, CURLOPT_URL, $form_url);
+        
+        //post data dependent on our own data
+        $post_data['domain'] = $arr['website'];
+        $post_data['ft_tip'] = $arr['description'];
+        //post data injected by remote site, necessary for form
+        $post_data['offerType'] = 'tip';    //variable according to site form
+        $post_data['source'] = '/submit';
+        $post_data['slice'] = 'control';
+        $post_data['csplit'] = 'control';
+        $post_data['vsplit'] = 'control';
+        $post_data['cread'] = 'control';
+        
+        //Stringify Post array data
+        foreach ( $post_data as $key => $value) {
+            $post_items[] = $key . '=' . $value;
+        }
+        $post_string = implode ('&', $post_items);
+        
+        //SET STRING TO POST
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_string);
+        
+        //EXECUTE POST CURL
+        $submit_result = curl_exec($curl_connection);
+        
+        //PRINT THIS LINE TO ERROR LOG
+        if (curl_errno($curl_connection) == 0) {
+            //PRINT PASS TO LOG
+            $to_log = 'PASS: ' .curl_errno($ch) . '-' . curl_error($ch) . ' ON - ' .  $form_url . 'POST: ' . $post_string . PHP_EOL;
+        } else {
+            //Print Error number and msg to log
+            $to_log = 'FAIL: ' .curl_errno($ch) . '-' . curl_error($ch) . ' ON - ' .  $form_url . 'POST: ' . $post_string . PHP_EOL;
+        }
+        //ADD $to_log RESULT TO txt
+        file_put_contents("logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
+        //CLOSE CURL RESOURCE
+        curl_close($ch);        
     }
 ?>
