@@ -47,6 +47,7 @@
         
     }
 
+    /* PROCEDURE BEGINS HERE */
     $curl = curl_init();
     curl_setopt_array($curl, array(
         CURLOPT_RETURNTRANSFER => 1,
@@ -60,8 +61,6 @@
     //decode JSON data into array
     $json = json_decode($resp, TRUE);
 
-    
-    //submit_timeout_newyork_email($json);
     if (is_array($json)) {
         foreach($json as  $key => $val) {
             //CALL ALL 5 SYNDICATION PROCEDURES HERE on $val

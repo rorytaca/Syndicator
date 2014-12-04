@@ -55,12 +55,13 @@
         //print_r(curl_getinfo($curl_connection));               
         
         //PRINT THIS LINE TO ERROR LOG
+        $date = date_create();
         if (curl_errno($curl_connection) == 0) {
             //PRINT PASS TO LOG
-            $to_log = 'PASS: ' .curl_errno($curl_connection) . '-' . curl_error($curl_connection) . ' ON - ' . $formActionUrl . 'POST: ' . $post_string . PHP_EOL;
+            $to_log = date_format($date, 'U = Y-m-d H:i:s') .' PASS: ' .curl_errno($curl_connection) . '-' . curl_error($curl_connection) . ' ON - ' . $formActionUrl . 'POST: ' . $post_string . PHP_EOL;
         } else {
             //Print Error number and msg to log
-            $to_log = 'FAIL: ' .curl_errno($curl_connection) . '-' . curl_error($curl_connection) . ' ON - ' . $formActionUrl. 'POST: ' . $post_string . PHP_EOL;
+            $to_log = date_format($date, 'U = Y-m-d H:i:s') . ' FAIL: ' .curl_errno($curl_connection) . '-' . curl_error($curl_connection) . ' ON - ' . $formActionUrl. 'POST: ' . $post_string . PHP_EOL;
         }
         //ADD $to_log RESULT TO txt
         file_put_contents("../../logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
@@ -100,11 +101,12 @@
         //Send Email
         $mail_sent = @mail( $to, $subject, $message, $email_headers );
         
+        $date = date_create();
         //Append Logs with result
         if ($mail_sent) {
-            $to_log = "PASS: EMAIL " . $subject . ' > ' . $to . PHP_EOL;
+            $to_log = date_format($date, 'U = Y-m-d H:i:s') .'PASS: EMAIL ' . $subject . ' > ' . $to . PHP_EOL;
         } else {
-            $to_log = "FAIL: EMAIL " . $subject . ' > ' . $to . PHP_EOL;
+            $to_log = date_format($date, 'U = Y-m-d H:i:s') .'FAIL: EMAIL ' . $subject . ' > ' . $to . PHP_EOL;
         }
         file_put_contents("../../logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
     }
@@ -164,13 +166,14 @@
         //EXECUTE POST CURL
         $submit_result = curl_exec($ch);
         
+        $date = date_create();
         //PRINT THIS LINE TO ERROR LOG
         if (curl_errno($ch) == 0) {
             //PRINT PASS TO LOG
-            $to_log = 'PASS: ' .curl_errno($ch) . '-' . curl_error($ch) . ' ON - ' .  $form_url . 'POST: ' . $post_string . PHP_EOL;
+            $to_log = date_format($date, 'U = Y-m-d H:i:s') .' PASS: ' .curl_errno($ch) . '-' . curl_error($ch) . ' ON - ' .  $form_url . 'POST: ' . $post_string . PHP_EOL;
         } else {
             //Print Error number and msg to log
-            $to_log = 'FAIL: ' .curl_errno($ch) . '-' . curl_error($ch) . ' ON - ' .  $form_url . 'POST: ' . $post_string . PHP_EOL;
+            $to_log = date_format($date, 'U = Y-m-d H:i:s') .' FAIL: ' .curl_errno($ch) . '-' . curl_error($ch) . ' ON - ' .  $form_url . 'POST: ' . $post_string . PHP_EOL;
         }
         //ADD $to_log RESULT TO txt
         file_put_contents("../../logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
@@ -217,14 +220,14 @@
   
         //DEBUG PRINT:   THIS LINE CAN BE USED TO VIEW WHAT THE CURL IS RETURNING IN TEXT. DISABLED FOR PRODUCTION
         //print_r(curl_getinfo($curl_connection));               
-        
+        $date = date_create();
         //PRINT THIS LINE TO ERROR LOG
         if (curl_errno($curl_connection) == 0) {
             //PRINT PASS TO LOG
-            $to_log = 'PASS: ' .curl_errno($curl_connection) . '-' . curl_error($curl_connection) . ' ON - ' . $formActionUrl . 'POST: ' . $post_string . PHP_EOL;
+            $to_log = date_format($date, 'U = Y-m-d H:i:s') .' PASS: ' .curl_errno($curl_connection) . '-' . curl_error($curl_connection) . ' ON - ' . $formActionUrl . 'POST: ' . $post_string . PHP_EOL;
         } else {
             //Print Error number and msg to log
-            $to_log = 'FAIL: ' .curl_errno($curl_connection) . '-' . curl_error($curl_connection) . ' ON - ' . $formActionUrl. 'POST: ' . $post_string . PHP_EOL;
+            $to_log = date_format($date, 'U = Y-m-d H:i:s') .' FAIL: ' .curl_errno($curl_connection) . '-' . curl_error($curl_connection) . ' ON - ' . $formActionUrl. 'POST: ' . $post_string . PHP_EOL;
         }
         //ADD $to_log RESULT TO txt
         file_put_contents("../../logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
@@ -262,12 +265,12 @@
             
         //Send Email
         $mail_sent = @mail( $to, $subject, $message, $email_headers );
-        
+        $date = date_create();
         //Append Logs with result
         if ($mail_sent) {
-            $to_log = "PASS: EMAIL " . $subject . ' > ' . $to . PHP_EOL;
+            $to_log = date_format($date, 'U = Y-m-d H:i:s') . ' PASS: EMAIL ' . $subject . ' > ' . $to . PHP_EOL;
         } else {
-            $to_log = "FAIL: EMAIL " . $subject . ' > ' . $to . PHP_EOL;
+            $to_log = date_format($date, 'U = Y-m-d H:i:s') . ' FAIL: EMAIL ' . $subject . ' > ' . $to . PHP_EOL;
         }
         file_put_contents("../../logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
     }

@@ -145,6 +145,11 @@ p.form-footer {
     font-size: .7em;
 }
 
+#footer-bar #logs {
+    float: right;
+    margin-right: 10px;
+}
+
 /* ==========================================================================
    COMMON CUSTOM STYLES AND BOOTSTRAP OVERWRITES
    ========================================================================== */

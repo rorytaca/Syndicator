@@ -15,7 +15,7 @@
         <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
         <script src="https://cdn.firebase.com/libs/angularfire/0.9.0/angularfire.min.js"></script>
         <script src="js/syndicator.js"></script>
-            
+
         <!-- CSS Includes: Bootstrap first, then custom ones/plugins -->
         <link href='http://fonts.googleapis.com/css?family=Ruda:400,700,900' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -45,6 +45,8 @@
                 <span class="glyphicon glyphicon-exclamation-sign red" aria-hidden="true"></span>
                 <span class="text"> = Unsynced</span>
                 <span class="tiny text">NEXT SYNC AT {{nextsync()}}:00 EST</span>
+                
+                <a href="logs/automated-syndication-logs.txt" target="_blank" id="logs"><span class="pull-right tiny text">VIEW cURL LOGS</span></a>
             </div>
         </div>
   

@@ -28,7 +28,7 @@
     </div>
     
     <div id="products-bar">
-        <div class="product-row" ng-repeat="product in products | orderBy:'name'"> 
+        <div class="product-row" ng-repeat="product in products | orderBy:'status'"> 
             <!-- <a href="https://amber-inferno-7558.firebaseio.com/{{product.$id}}">{{product.$id}}</a>-->
             <a class="product-info name" ng-href="{{product.site}}" target="_blank" href="https://amber-inferno-7558.firebaseio.com/{{product.$id}}">{{product.name}}</a>
             <span class="product-info price">${{product.price}}</span>

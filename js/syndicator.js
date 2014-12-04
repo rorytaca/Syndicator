@@ -1,4 +1,4 @@
-angular.module('syndicatorApp', ['ngRoute', 'firebase'])
+angular.module('syndicatorApp', ['ngRoute','firebase'])
     //firebase first
     .value('fbURL1', 'https://amber-inferno-7558.firebaseio.com/')
     .factory('Products', function($firebase, fbURL1) {
@@ -25,9 +25,6 @@ angular.module('syndicatorApp', ['ngRoute', 'firebase'])
             .when('/listSites', {
               controller:'ListSitesCtrl',
               templateUrl:'views/listSites.html'
-            }).when('/clearTable', {
-              controller:'clearTableCtrl',
-              redirectTo:'/'
             })
             .otherwise({
               redirectTo:'/'
@@ -37,13 +34,45 @@ angular.module('syndicatorApp', ['ngRoute', 'firebase'])
         $scope.products = Products;
     })
     .controller('AddProductCtrl', function($scope, $location, Products) {
+        $scope.today = function() {
+           $scope.dt = new Date();
+        };
         
+        $scope.today();
+      
+        $scope.clear = function () {
+          $scope.dt = null;
+        };
+      
+        // Disable weekend selection
+        $scope.disabled = function(date, mode) {
+          return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+        };
+      
+        $scope.toggleMin = function() {
+          $scope.minDate = $scope.minDate ? null : new Date();
+        };
+        $scope.toggleMin();
+      
+        $scope.open = function($event) {
+          $event.preventDefault();
+          $event.stopPropagation();
+      
+          $scope.opened = true;
+        };
+        
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };        
+         
+        $scope.format =  'dd-MM-yyyy';
         $scope.save = function() {
             $scope.product.status = false;
             Products.$add($scope.product).then(function(data) {
                $location.path('/');
             });
-      };
+        };
     })
     .controller('ListSitesCtrl', function($scope, Websites) {
         $scope.websites = Websites;
@@ -53,7 +82,7 @@ angular.module('syndicatorApp', ['ngRoute', 'firebase'])
             Websites.$add($scope.website).then(function(data) {
                $location.path('/listSites');
             });
-      };
+        };
     })
     .controller('FooterCtrl', function($scope) {
         $scope.nextsync = function() {
