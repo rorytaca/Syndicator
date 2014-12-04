@@ -15,8 +15,8 @@ angular.module('syndicatorApp', ['ngRoute', 'firebase'])
               templateUrl:'views/listProducts.html'
             })
             .when('/newProduct', {
-              controller:'AddPromotionCtrl',
-              templateUrl:'views/addPromotion.html'
+              controller:'AddProductCtrl',
+              templateUrl:'views/addProduct.html'
             })
             .when('/newSite', {
               controller:'AddSiteCtrl',
@@ -25,6 +25,9 @@ angular.module('syndicatorApp', ['ngRoute', 'firebase'])
             .when('/listSites', {
               controller:'ListSitesCtrl',
               templateUrl:'views/listSites.html'
+            }).when('/clearTable', {
+              controller:'clearTableCtrl',
+              redirectTo:'/'
             })
             .otherwise({
               redirectTo:'/'
@@ -33,7 +36,7 @@ angular.module('syndicatorApp', ['ngRoute', 'firebase'])
     .controller('ListProductsCtrl', function($scope, Products) {
         $scope.products = Products;
     })
-    .controller('AddPromotionCtrl', function($scope, $location, Products) {
+    .controller('AddProductCtrl', function($scope, $location, Products) {
         
         $scope.save = function() {
             $scope.product.status = false;
@@ -51,4 +54,26 @@ angular.module('syndicatorApp', ['ngRoute', 'firebase'])
                $location.path('/listSites');
             });
       };
-    }) 
+    })
+    .controller('FooterCtrl', function($scope) {
+        $scope.nextsync = function() {
+            var d = new Date();
+            var h = d.getHours();
+            var nh = h + 1;
+            return nh;
+        };
+    })
+    .directive('clearTable', function() {
+        return function(scope, element, attrs) {
+            var clickingCallback = function() {
+                var r = confirm("ALERT: Are you absolutely sure you want to clear the database table?!");
+                if (r == true) {
+                    var fbref = new Firebase('https://amber-inferno-7558.firebaseio.com/');
+                    fbref.remove();
+                } else {
+                    
+                }
+            };
+            element.bind('click', clickingCallback);
+        }
+    });

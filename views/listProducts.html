@@ -2,7 +2,7 @@
     <div id="tool-bar">
         <a href="#/newProduct" class="tool-bar-btn" id="">
             <span class="glyphicon  glyphicon-plus-sign" aria-hidden="true"></span>
-            <span>Add New Promotion</span>
+            <span>Add New Product</span>
         </a>
         <a href="#/newSite" class="tool-bar-btn" id="">
             <span class="glyphicon  glyphicon-plus-sign" aria-hidden="true"></span>
@@ -17,9 +17,7 @@
         <a href="#/listSites" class="tool-bar-btn green" id="">
             <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
             <span>View Sites List</span>
-        </a>        
-        
-        
+        </a>          
     </div>
     
     <div id="info-bar" class="inner2-wrapper">
@@ -29,14 +27,15 @@
         <span class="info-bar-header stat">Status</span>
     </div>
     
-    <div class="product-row" ng-repeat="product in products | orderBy:'name'"> 
-        <!-- <a href="https://amber-inferno-7558.firebaseio.com/{{product.$id}}">{{product.$id}}</a>-->
-        <a class="product-info name" ng-href="{{product.site}}" target="_blank" href="https://amber-inferno-7558.firebaseio.com/{{product.$id}}">{{product.name}}</a>
-        <span class="product-info price">${{product.price}}</span>
-        <span class="product-info desc">{{product.description}}</span>
-        <span class="glyphicon glyphicon-ok green" aria-hidden="true" ng-show="{{product.status}}"></span>
-        <span class="glyphicon glyphicon-exclamation-sign red" aria-hidden="true" ng-show="!{{product.status}}"></span>
-        
-        
-
+    <div id="products-bar">
+        <div class="product-row" ng-repeat="product in products | orderBy:'name'"> 
+            <!-- <a href="https://amber-inferno-7558.firebaseio.com/{{product.$id}}">{{product.$id}}</a>-->
+            <a class="product-info name" ng-href="{{product.site}}" target="_blank" href="https://amber-inferno-7558.firebaseio.com/{{product.$id}}">{{product.name}}</a>
+            <span class="product-info price">${{product.price}}</span>
+            <span class="product-info desc">{{product.description}}</span>
+            <span class="glyphicon glyphicon-ok green" aria-hidden="true" ng-show="{{product.status}}"></span>
+            <span class="glyphicon glyphicon-exclamation-sign red" aria-hidden="true" ng-show="!{{product.status}}"></span>
+        </div>
     </div>
+
+    <button type="button" class="btn btn-danger pull-right" clear-table>Clear Product Table</button>

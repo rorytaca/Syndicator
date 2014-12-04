@@ -33,6 +33,7 @@
         foreach ( $post_data as $key => $value) {
             $post_items[] = $key . '=' . $value;
         }
+        
         $post_string = implode ('&', $post_items);
         
         //create cURL connection
@@ -62,7 +63,7 @@
             $to_log = 'FAIL: ' .curl_errno($curl_connection) . '-' . curl_error($curl_connection) . ' ON - ' . $formActionUrl. 'POST: ' . $post_string . PHP_EOL;
         }
         //ADD $to_log RESULT TO txt
-        file_put_contents("logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
+        file_put_contents("../../logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
         
         //CLOSE CURL RESOURCE
         curl_close($curl_connection);
@@ -74,6 +75,7 @@
         //Variables for email
         //$to = 'thisweek.ny@timeout.com';                                     //FOR TESTING CHANGE TO - $to = "syndicatordemo@gmail.com";
         $to = "syndicatordemo@gmail.com";
+        
         $subject = 'Event Listing: ' . $arr['name'];
         $headers = "From: joe@example.com\r\nReply-To: joe@example.com";    //Fake emails for header  
 
@@ -104,7 +106,7 @@
         } else {
             $to_log = "FAIL: EMAIL " . $subject . ' > ' . $to . PHP_EOL;
         }
-        file_put_contents("logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
+        file_put_contents("../../logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
     }
     
     //Handles form submissions to URL: http://www.retailmenot.com/submit
@@ -146,19 +148,24 @@
         $post_data['cread'] = 'control';
         
         //Stringify Post array data
-        foreach ( $post_data as $key => $value) {
-            $post_items[] = $key . '=' . $value;
+        if (is_array($post_data)) {
+            foreach ($post_data as $key => $value) {
+                $post_items[] = $key . '=' . $value;
+            }
+             $post_string = implode('&', $post_items);
+        } else {
+            $post_string = $post_data.'='.$value;
         }
-        $post_string = implode ('&', $post_items);
+        //$post_string = implode('&', $post_items);
         
         //SET STRING TO POST
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post_string);
         
         //EXECUTE POST CURL
-        $submit_result = curl_exec($curl_connection);
+        $submit_result = curl_exec($ch);
         
         //PRINT THIS LINE TO ERROR LOG
-        if (curl_errno($curl_connection) == 0) {
+        if (curl_errno($ch) == 0) {
             //PRINT PASS TO LOG
             $to_log = 'PASS: ' .curl_errno($ch) . '-' . curl_error($ch) . ' ON - ' .  $form_url . 'POST: ' . $post_string . PHP_EOL;
         } else {
@@ -166,13 +173,13 @@
             $to_log = 'FAIL: ' .curl_errno($ch) . '-' . curl_error($ch) . ' ON - ' .  $form_url . 'POST: ' . $post_string . PHP_EOL;
         }
         //ADD $to_log RESULT TO txt
-        file_put_contents("logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
+        file_put_contents("../../logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
         //CLOSE CURL RESOURCE
         curl_close($ch);        
     }
     
     //Handles form submissions to URL: https://www.mycoupons.com/submit-a-coupon/
-    //Not 100% sure this ones going to work at all. Theres an AJAX launched filter on the Store/Website input field that cleans the field if its not one of the pre-approved vendors I'm assuming!
+    //Not 100% sure this ones going to work at all. Theres an AJAX launched filter on unfocus event in the Store/Website input field that cleans the field if its not one of the pre-approved vendors I'm assuming!
     //Going to try to push the header through anyway, not sure if this sanitation is only on the user-viewable form or will interupt a header request as well.
     function submit_mycoupons_form($arr) {
         $formActionUrl = 'https://www.mycoupons.com/api/coupon/submit';
@@ -184,7 +191,7 @@
         $post_data['code'] = '';
         
         $exp_date = explode('-',$arr['expiration_date']);   //Break down expiration date string: MM-DD-YYYY to [0],[1],[2]
-        $exp_date_new = $exp_date[0] . '/' / $exp_date[1] . '/' . $exp_date[2] //concat back to MM/DD/YYYY
+        $exp_date_new = implode ('/', $exp_date); //concat back to MM/DD/YYYY
         $post_data['dateExpiration'] = $exp_date_new;
         
         //Stringify Post array data
@@ -220,7 +227,7 @@
             $to_log = 'FAIL: ' .curl_errno($curl_connection) . '-' . curl_error($curl_connection) . ' ON - ' . $formActionUrl. 'POST: ' . $post_string . PHP_EOL;
         }
         //ADD $to_log RESULT TO txt
-        file_put_contents("logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
+        file_put_contents("../../logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
         
         //CLOSE CURL RESOURCE
         curl_close($curl_connection);
@@ -229,7 +236,8 @@
     //Handles automated e-mailing submissions to URL: http://www.bargainist.com/ ... Emailing to 'deals@bargainist.com'
     function submit_bargainist_email($arr) {
         //Variables for email
-        $to = 'deals@bargainist.com';                                     //FOR TESTING CHANGE TO - $to = "syndicatordemo@gmail.com";
+        //$to = 'deals@bargainist.com';                                     //FOR TESTING CHANGE TO - $to = "syndicatordemo@gmail.com";
+        $to = "syndicatordemo@gmail.com";
        
         $subject = 'Event Listing: ' . $arr['name'];
         $headers = "From: joe@example.com\r\nReply-To: joe@example.com";    //Fake emails for header  
@@ -261,6 +269,6 @@
         } else {
             $to_log = "FAIL: EMAIL " . $subject . ' > ' . $to . PHP_EOL;
         }
-        file_put_contents("logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
+        file_put_contents("../../logs/automated-syndication-logs.txt", $to_log, FILE_APPEND);
     }
 ?>

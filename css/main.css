@@ -25,7 +25,7 @@ h2 {
     font-size: 2em;
 }
 
-#tool-bar {
+#tool-bar, #footer-bar {
     float: left;
     min-height: 50px;
     max-height: 220px;
@@ -74,6 +74,10 @@ h2 {
     width: 25%;
 }
 
+.info-bar-header.url, .product-info.url {
+    width: 70%;
+}
+
 .info-bar-header.desc, .product-info.desc {
     width: 30%;
 }
@@ -84,6 +88,8 @@ h2 {
 
 #products-bar {
     width: 100%;
+    min-height: 400px;
+    height: auto;
 }
 
 .product-row {
@@ -92,6 +98,13 @@ h2 {
     height: 40px;
     line-height: 300%;
     border-bottom: solid 1px #eaeaea;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.product-info {
+    text-overflow: ellipsis;
+    
 }
 
 .product-row:nth-of-type(odd) {
@@ -107,6 +120,29 @@ p.form-footer {
     clear: both;
     padding-top: 15px;
     font-size: .8em;
+}
+
+#footer-bar {
+    margin-top: 22px;
+    background: #EEEAF7;
+    border-color: #CBBAF4;
+}
+#footer-bar span{
+    float: left;
+    margin-top: 15px;
+}
+
+#footer-bar span.text{
+    margin-left: 5px;
+    font-weight: 600;
+    font-family: "Ruda", Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: .9em;
+}
+
+#footer-bar span.text.tiny {
+    margin: 17px 0 0 20px;
+    font-size: .7em;
 }
 
 /* ==========================================================================

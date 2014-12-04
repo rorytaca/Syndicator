@@ -2,7 +2,7 @@
     <div id="tool-bar" class="inner2-wrapper">
         <a href="#/newProduct" class="tool-bar-btn" id="">
             <span class="glyphicon  glyphicon-plus-sign" aria-hidden="true"></span>
-            <span>Add New Promotion</span>
+            <span>Add New Product</span>
         </a>
         <a href="#/newSite" class="tool-bar-btn" id="">
             <span class="glyphicon  glyphicon-plus-sign" aria-hidden="true"></span>
@@ -24,12 +24,13 @@
     
     <div id="info-bar" class="inner2-wrapper">
         <span class="info-bar-header name">Name</span>
-        <span class="info-bar-header price">URL</span>
+        <span class="info-bar-header url">URL</span>
     </div>
     
     <div class="product-row" ng-repeat="website in websites | orderBy:'name'"> 
         <!-- <a href="https://amber-inferno-7558.firebaseio.com/{{product.$id}}">{{product.$id}}</a>-->
         <a class="product-info name" ng-href="{{product.site}}" target="_blank" href="https://amber-inferno-7558.firebaseio.com/{{product.$id}}">{{website.name}}</a>
-        <span class="product-info price">{{website.site}}</span>
+        <span class="product-info url">{{website.site}}</span>
 
     </div>
+    

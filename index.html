@@ -36,17 +36,17 @@
                 <h1>Pulsd Syndicator Demo</h1>
             </div>
             
-            <div id="products-bar">
-                <!-- Will read from database, and populate all the promotions listed so far in this div -->
-                <div ng-view></div>
-                
+            <!-- Will read from database, and populate all the promotions listed so far in this div -->
+            <div ng-view></div>
+            
+            <div id="footer-bar" ng-controller="FooterCtrl">
+                <span class="glyphicon glyphicon-ok green" aria-hidden="true"></span>
+                <span class="text"> = Synced</span>
+                <span class="glyphicon glyphicon-exclamation-sign red" aria-hidden="true"></span>
+                <span class="text"> = Unsynced</span>
+                <span class="tiny text">NEXT SYNC AT {{nextsync()}}:00 EST</span>
             </div>
-
         </div>
-        
-        
-        
-        
   
         <!-- End of Page Content-->
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

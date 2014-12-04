@@ -12,13 +12,13 @@
 -->
 <?php
     
-    include('php/scripts/syndication_processes.php');   //Syndication functions in here
+    include('syndication_processes.php');   //Syndication functions in here
     $url = 'https://amber-inferno-7558.firebaseio.com/.json';   //DB root location
     
     //Function executes a put cURL, update STATUS of obj to TRUE
     function putcURLtoFireBase($item,$objname) {
         //if [status] is not true, launch processes
-        if ($item['status'] != 1) {
+        
             print_r($objname);
             
             print "<br />";
@@ -44,7 +44,7 @@
                 print PHP_EOL.'PASS: '.curl_errno($ch) . '-' . curl_error($ch);
             }
             curl_close($ch);
-        }
+        
     }
 
     $curl = curl_init();
@@ -65,24 +65,28 @@
     if (is_array($json)) {
         foreach($json as  $key => $val) {
             //CALL ALL 5 SYNDICATION PROCEDURES HERE on $val
-            
-            submit_dealcatchers_form($val)
-            submit_timeout_newyork_email($val);
-            submit_retailmenot_form($val);
-            submit_mycoupons_form($val)
-             
-            putcURLtoFireBase($val, $key);
+            if ($val['status'] != TRUE) {
+                submit_dealcatchers_form($val);
+                submit_timeout_newyork_email($val);
+                submit_retailmenot_form($val);
+                submit_mycoupons_form($val);
+                submit_bargainist_email($val);
+                 
+                putcURLtoFireBase($val, $key);
+            }
         }    
     } else {
         //Only single node of data returned so
         //CALL ALL 5 SYNDICATION PROCEDURES HERE AS WELL FOR individual $json
-        
-        submit_dealcatchers_form($json)
-        submit_timeout_newyork_email($json);
-        submit_retailmenot_form($json);
-        submit_mycoupons_form($json)
-        
-        putcURLtoFireBase($json);
+        if ($json['status'] != TRUE) {
+            submit_dealcatchers_form($json);
+            submit_timeout_newyork_email($json);
+            submit_retailmenot_form($json);
+            submit_mycoupons_form($json);
+            submit_bargainist_email($json);
+            
+            putcURLtoFireBase($json);
+        }
     }
 
 ?>
